@@ -1,21 +1,48 @@
-#include <iostream>
-#include "TextFile.h"
+//#include <iostream>
+//#include "TextFile.h"
+//
+//int main(int argc, char* argv[])
+//{
+//	using namespace std;
+//
+//	if (argc != 2) return 1;
+//	TextFile file(argv[1]);
+//
+//
+//
+//}
 
-int main(int argc, char* argv[])
+#include <GLFW/glfw3.h>
+
+int main(void)
 {
-	using namespace std;
+    GLFWwindow* window;
 
-	if (argc != 2) return 1;
+    /* Initialize the library */
+    if (!glfwInit())
+        return -1;
 
-	TextFile file(argv[1]);
+    /* Create a windowed mode window and its OpenGL context */
+    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    if (!window)
+    {
+        glfwTerminate();
+        return -1;
+    }
 
-	cout << file.getContent();
+    /* Make the window's context current */
+    glfwMakeContextCurrent(window);
 
-	file.commitContent("Hiiiiii");
+    /* Loop until the user closes the window */
+    while (!glfwWindowShouldClose(window))
+    {
+        glClear(GL_COLOR_BUFFER_BIT);
 
-	cout << file.getContent();
+        glfwSwapBuffers(window);
 
-	file.commitContent("N E W");
+        glfwPollEvents();
+    }
 
-	cout << file.getContent();
+    glfwTerminate();
+    return 0;
 }
